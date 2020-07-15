@@ -12,7 +12,7 @@ Window {
     title: qsTr("Nested Models")
 
     readonly property int defaultSpacing: 5
-    property var urls: [
+    property var rootModel: [
         "qt.io",
         "kde.org",
         "linux.org",
@@ -23,7 +23,7 @@ Window {
         id: tabBar
 
         Repeater {
-            model: root.urls
+            model: rootModel
 
             TabButton {
                 text: modelData
@@ -38,18 +38,15 @@ Window {
         currentIndex: tabBar.currentIndex
 
         Repeater {
-            model: root.urls
+            model: rootModel
 
-            Item {
-                ListView {
-                    model: SubModel {
-                        source: modelData
-                    }
-                    anchors.fill: parent
+            ListView {
+                model: SubModel {
+                    source: modelData
+                }
 
-                    delegate: Text {
-                        text: display
-                    }
+                delegate: Text {
+                    text: display
                 }
             }
         }
